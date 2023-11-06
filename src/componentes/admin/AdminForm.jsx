@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import Input from "../Input";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+import { postTaskFn } from "../../api/taskApi";
 
-const AdminForm = (props) => {
-  const {setTask} = props;
+const AdminForm = () => {
+  //------ RHF
   const {
     register,
     handleSubmit: onSubmitRHF,
@@ -12,11 +14,14 @@ const AdminForm = (props) => {
     reset,
   } = useForm();
 
-  const handleSubmit = (data) => {
-    console.log(data);
+//------ TQUERY
+const {mutate:postTask} = useMutation({mutationFn: postTaskFn,})
 
-    const newTask = {...data, id: 123};
-    setTask((prev)=>{[...prev, newTask]})
+//------ HANDLER
+  const handleSubmit = (data) => {
+    
+    postTask(data)
+    
 
     toast.success('Tarea agregada con exito !!!')
     Swal.fire({
@@ -25,6 +30,10 @@ const AdminForm = (props) => {
     })
     reset();
   };
+
+
+//------ RENDER
+
   return (
     <form className="" onSubmit={onSubmitRHF(handleSubmit)}>
       <Input

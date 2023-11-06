@@ -1,6 +1,10 @@
+import { TableRow } from "./TableRow";
 
 const AdminTable = (props) => {
-  const {task, setTask}= props;
+  const { task } = props;
+
+
+
   return (
     <section className='table-responsive mt-3 rounded'>
       <table className='table'>
@@ -13,13 +17,13 @@ const AdminTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {task.map((task,index) => (
-            <TableRow task={task} key={task.id} index={index} />
+          {task.map((item, index) => (
+            <TableRow task={item} key={item.id} index={index} />
           ))}
         </tbody>
       </table>
     </section>
-  )
-}
+  );
+};
 
-export default AdminTable
+export default AdminTable;

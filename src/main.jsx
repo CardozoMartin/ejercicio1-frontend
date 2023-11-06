@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom/client'
 
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-const queryClient = new QueryClient();
+import { Toaster } from 'sonner';
+
+import AdminView from './views/AdminView.jsx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 import './index.css'
-import AdminView from './views/AdminView.jsx';
 
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
 
     <AdminView/>
+    <Toaster position='top-right' richColors/>
     </QueryClientProvider>
   </React.StrictMode>,
 )
